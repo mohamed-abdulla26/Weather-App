@@ -13,7 +13,7 @@
 
 
 import './App.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 function WeatherDetails({img ,city,cel,country,lat,lon,humi,wind}){
 
   return(
@@ -60,7 +60,7 @@ function WeatherDetails({img ,city,cel,country,lat,lon,humi,wind}){
 }
 function App() {
   const KEY="e53e3ac1f9d98f1f4e0ba73d5a5deb9d"
-  const[text,setText]=useState("")
+  const[text,setText]=useState("chennai")
   const[img,setImg]=useState()
   const[city,setCity]=useState("")
   const[cel,setCel]=useState(0)
@@ -134,10 +134,14 @@ function App() {
       search()
     }
   }
+
+  useEffect(function(){
+    search()
+  },[])
   return (
     <div className="container">
       <div className="dataInput">
-        <input type="text" placeholder='Enter the city' onChange={handleText} onKeyDown={handledata} />
+        <input type="text" placeholder='Enter the city' onChange={handleText}  onKeyDown={handledata} value={text}/>
         <div className="search">
           <img src={SEARCH} alt="serach" onClick={search}/>
         </div>
